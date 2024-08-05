@@ -24,3 +24,18 @@ Given that these hazardous N.E.O.s are classified and labeled by NASA, there is 
 
 ## EDA and Data Prep
 EDA and Data Preperation have been done in the notebook already. Some key insights from it are that absolute_magnitude and the natural log of estimated_diameter are 1 to 1 correlated, which means we should remove these features. I also transformed the velocity by taking the square root of it to make it more normalized. The discovered year was extracted from the "name" feature. Additonal data prep that is needed will be to standardize continuous normal features and bin weirdly distributed features like discovery year. 
+
+## Modeling and Tuning
+Steps for modeling in this project were first to build a logistic regression model to get an interpretation of the data. An overview of the findings from this methodology (particularly the regression table) was:
+- const: on the whole we are more likely to classify a NEO as non hazardous
+- absolute magnitude: as the absolute maginitude increases, the likelihood of a NEO being hazardous decreases. This makes sense as this is inverse with e raised to estimated diameter, or the size. So as a the size increases, the likelihood of of a NEO being hazardous increases
+- relative velocity: as the relative velocity increases, the likelihood of a NEO being hazardous increases.
+- miss_distance: as the miss distance increases, the likelihood of a NEO being hazardous decreases.
+
+After the logisitc regression model did perform super well for preditive power, other models were tested and evaluated primarly on F1 score (since our data set is massively unbalanced). Of the tested models, a Random Forest model was found to be the best default classifier. Parameter and [decision threshold tuning](https://scikit-learn.org/stable/modules/classification_threshold.html) were then performed to optimize the model a little bit more. The results of this final model were:
+- Accuracy of 93.48%
+- Precision of 72.48%
+- Recall of 78.79%
+- F1 score of 75.50%
+
+More details on the methodology and findings from the modeling and tuning sections of the project can be found in the ipython notebook in markdown cells.  
